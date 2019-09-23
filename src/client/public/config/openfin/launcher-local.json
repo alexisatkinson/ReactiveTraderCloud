@@ -63,18 +63,21 @@
         {
             "name": "layouts",
             "config": {
-              "features": {
-                "snap": true,
-                "dock": true,
-                "tab": false
-              }
-            }
+                "features": {
+                    "snap": true,
+                    "dock": true,
+                    "tab": false
+                }
+            },
+            "manifestUrl": "https://cdn.openfin.co/services/openfin/layouts/app.json"
         },
         {
-            "name": "fdc3"
+            "name": "fdc3",
+            "manifestUrl": "https://cdn.openfin.co/services/openfin/fdc3/app.json"
         },
         {
-            "name": "notifications"
+            "name": "notifications",
+            "manifestUrl": "https://cdn.openfin.co/services/openfin/notifications/app.json"
         }
     ]
 }
