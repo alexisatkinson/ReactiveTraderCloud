@@ -41,7 +41,7 @@
     "storybook:build": "build-storybook -c .storybook -o storybook/build",
     "sleep": "sleep 5",
     "webdriver-update": "webdriver-manager update",
-    "pree2e": "tsc --project __tests__/e2e/tsconfig.e2e.json",
+    "pree2e": "webdriver-manager update && tsc --project __tests__/e2e/tsconfig.e2e.json",
     "e2e": "protractor __tests__/e2e/protractor.config.js"
   },
   "license": "MIT",
