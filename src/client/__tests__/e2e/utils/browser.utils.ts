@@ -1,39 +1,34 @@
-import { ProtractorBrowser } from 'protractor';
+import { ElementFinder, ExpectedConditions as EC, ProtractorBrowser } from 'protractor'
 
-export function setActiveBrowser(browser: ProtractorBrowser) {
-  (global as any).browser = browser;
-}
+export const waitForElementToBePresent = createBrowserExpectationAwaiter(EC.presenceOf.name, finder =>
+  EC.presenceOf(finder),
+)
+export const waitForElementToBeVisible = createBrowserExpectationAwaiter(EC.visibilityOf.name, finder =>
+  EC.visibilityOf(finder),
+)
+export const waitForElementToBeInvisible = createBrowserExpectationAwaiter(EC.invisibilityOf.name, finder =>
+  EC.invisibilityOf(finder),
+)
+export const waitForElementToBeClickable = createBrowserExpectationAwaiter(EC.elementToBeClickable.name, finder =>
+  EC.elementToBeClickable(finder),
+)
 
-export async function withBrowserAsActive<T>(
-  browser: ProtractorBrowser,
-  action: () => T | Promise<T>
-): Promise<T> {
-  const previouslyActiveBrowser: ProtractorBrowser = (global as any).browser;
-
-  try {
-    setActiveBrowser(browser);
-
-    const actionResult = action();
-    const result = await Promise.resolve(actionResult);
-
-    return result;
-  } finally {
-    setActiveBrowser(previouslyActiveBrowser);
+function createBrowserExpectationAwaiter(expectationName: string, expectedConditions: (finder: ElementFinder) => any) {
+  return async (browser: ProtractorBrowser, finder: ElementFinder, timeout = 5000) => {
+    try {
+      await browser.wait(expectedConditions(finder), timeout)
+    } catch (error) {
+      throw augmentErrorWithFinderDetails(error, expectationName, finder)
+    }
   }
 }
 
-export async function withoutWaitForAngular<T>(
-  browser: ProtractorBrowser,
-  action: () => T | Promise<T>
-): Promise<T> {
-  try {
-    await browser.waitForAngularEnabled(false);
+function augmentErrorWithFinderDetails(error: Error, expectation: string, finder: ElementFinder): Error {
+  const selector = finder.locator().toString()
 
-    const actionResult = action();
-    const result = await Promise.resolve(actionResult);
+  const newError = new Error(`${error.message} while expecting ${expectation} ${selector}`)
+  newError.name = error.name
+  newError.stack = error.stack
 
-    return result;
-  } finally {
-    await browser.waitForAngularEnabled(true);
-  }
+  return newError
 }

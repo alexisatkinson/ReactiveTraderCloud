@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const protractor_1 = require("protractor");
 const trade_page_1 = require("../pages/trade.page");
 const trade_method_1 = require("../steps/trade.method");
+const async_utils_1 = require("../utils/async.utils");
 const tradePage = new trade_page_1.TradePage();
 const tradeMethod = new trade_method_1.TradeMethod();
 describe('UI Smoke Tests for Reactive Trader Cloud App', () => __awaiter(this, void 0, void 0, function* () {
@@ -19,30 +20,37 @@ describe('UI Smoke Tests for Reactive Trader Cloud App', () => __awaiter(this, v
         yield protractor_1.browser.waitForAngularEnabled(false);
         yield protractor_1.browser.get(protractor_1.browser.params.baseUrl);
     }));
-    it('should validate the GBP to USD trade', () => __awaiter(this, void 0, void 0, function* () {
-        expect(yield protractor_1.browser.getTitle()).toEqual('Reactive Trader Cloud');
-        yield tradeMethod.GBPToUSDTrade();
-        yield expect(tradePage.textTradeStatus().getText()).toEqual('Done');
-        expect(tradePage.textBackGroundColour().getCssValue('background-color')).toEqual('rgba(40, 201, 136, 1)');
+    it('User should be able to refine search', () => __awaiter(this, void 0, void 0, function* () {
+        yield async_utils_1.wait(10000);
+        console.log("am i here!");
     }));
-    it('should  validate the GBP to JPY trade', () => __awaiter(this, void 0, void 0, function* () {
-        yield tradeMethod.GBPToJPYTrade();
-        expect(tradePage.textTradeStatus().getText()).toEqual('Rejected');
-        expect(tradePage.textBackGroundColour().getCssValue('background-color')).toEqual('rgba(249, 76, 76, 1)');
-    }));
-    it('should  validate the EUR to JPY trade', () => __awaiter(this, void 0, void 0, function* () {
-        yield tradeMethod.EURToJPYTrade();
-        expect(tradePage.textTradeStatus().getText()).toEqual('Done');
-    }));
-    it('should  validate the EUR to USD trade', () => __awaiter(this, void 0, void 0, function* () {
-        yield tradeMethod.EURToUSDTrade();
-        expect(tradePage.textTradeId().isPresent()).toBeTruthy();
-        expect(tradePage.textTradeStatus().getText()).toEqual('Done');
-        expect(tradePage.textTradeDate().isPresent()).toBeTruthy();
-        expect(tradePage.textTradeDirection().getText()).toEqual('Sell');
-    }));
+    // it('should validate the GBP to USD trade', async() => {
+    //   expect(await browser.getTitle()).toEqual('Reactive Trader Cloud')
+    //   await tradeMethod.GBPToUSDTrade()
+    //   await expect(tradePage.textTradeStatus().getText()).toEqual('Done')
+    //   expect(tradePage.textBackGroundColour().getCssValue('background-color')).toEqual('rgba(40, 201, 136, 1)')
+    // })
+    //
+    // it('should  validate the GBP to JPY trade', async() => {
+    //   await tradeMethod.GBPToJPYTrade()
+    //   expect(tradePage.textTradeStatus().getText()).toEqual('Rejected')
+    //   expect(tradePage.textBackGroundColour().getCssValue('background-color')).toEqual('rgba(249, 76, 76, 1)')
+    // })
+    //
+    // it('should  validate the EUR to JPY trade', async() => {
+    //   await tradeMethod.EURToJPYTrade()
+    //   expect(tradePage.textTradeStatus().getText()).toEqual('Done')
+    // })
+    //
+    // it('should  validate the EUR to USD trade', async() => {
+    //   await tradeMethod.EURToUSDTrade()
+    //   expect(tradePage.textTradeId().isPresent()).toBeTruthy()
+    //   expect(tradePage.textTradeStatus().getText()).toEqual('Done')
+    //   expect(tradePage.textTradeDate().isPresent()).toBeTruthy()
+    //   expect(tradePage.textTradeDirection().getText()).toEqual('Sell')
+    // })
     afterAll(() => __awaiter(this, void 0, void 0, function* () {
         yield protractor_1.browser.close();
     }));
 }));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHJhZGUuc3BlYy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3Rlc3RzL3RyYWRlLnNwZWMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHdCQUF3QjtBQUN4QiwyQ0FBOEQ7QUFDOUQsb0RBQStDO0FBQy9DLHdEQUFtRDtBQUVuRCxNQUFNLFNBQVMsR0FBRyxJQUFJLHNCQUFTLEVBQUUsQ0FBQTtBQUNqQyxNQUFNLFdBQVcsR0FBRyxJQUFJLDBCQUFXLEVBQUUsQ0FBQTtBQUVyQyxRQUFRLENBQUMsOENBQThDLEVBQUUsR0FBUSxFQUFFO0lBRWpFLFVBQVUsQ0FBQyxHQUFRLEVBQUU7UUFDbkIsTUFBTSxvQkFBTyxDQUFDLHFCQUFxQixDQUFDLEtBQUssQ0FBQyxDQUFBO1FBQzFDLE1BQU0sb0JBQU8sQ0FBQyxHQUFHLENBQUMsb0JBQU8sQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLENBQUE7SUFDM0MsQ0FBQyxDQUFBLENBQUMsQ0FBQTtJQUVGLEVBQUUsQ0FBQyxzQ0FBc0MsRUFBRSxHQUFRLEVBQUU7UUFDbkQsTUFBTSxDQUFDLE1BQU0sb0JBQU8sQ0FBQyxRQUFRLEVBQUUsQ0FBQyxDQUFDLE9BQU8sQ0FBQyx1QkFBdUIsQ0FBQyxDQUFBO1FBQ2pFLE1BQU0sV0FBVyxDQUFDLGFBQWEsRUFBRSxDQUFBO1FBQ2pDLE1BQU0sTUFBTSxDQUFDLFNBQVMsQ0FBQyxlQUFlLEVBQUUsQ0FBQyxPQUFPLEVBQUUsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsQ0FBQTtRQUNuRSxNQUFNLENBQUMsU0FBUyxDQUFDLG9CQUFvQixFQUFFLENBQUMsV0FBVyxDQUFDLGtCQUFrQixDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUMsdUJBQXVCLENBQUMsQ0FBQTtJQUMzRyxDQUFDLENBQUEsQ0FBQyxDQUFBO0lBRUYsRUFBRSxDQUFDLHVDQUF1QyxFQUFFLEdBQVEsRUFBRTtRQUNwRCxNQUFNLFdBQVcsQ0FBQyxhQUFhLEVBQUUsQ0FBQTtRQUNqQyxNQUFNLENBQUMsU0FBUyxDQUFDLGVBQWUsRUFBRSxDQUFDLE9BQU8sRUFBRSxDQUFDLENBQUMsT0FBTyxDQUFDLFVBQVUsQ0FBQyxDQUFBO1FBQ2pFLE1BQU0sQ0FBQyxTQUFTLENBQUMsb0JBQW9CLEVBQUUsQ0FBQyxXQUFXLENBQUMsa0JBQWtCLENBQUMsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxzQkFBc0IsQ0FBQyxDQUFBO0lBQzFHLENBQUMsQ0FBQSxDQUFDLENBQUE7SUFFRixFQUFFLENBQUMsdUNBQXVDLEVBQUUsR0FBUSxFQUFFO1FBQ3BELE1BQU0sV0FBVyxDQUFDLGFBQWEsRUFBRSxDQUFBO1FBQ2pDLE1BQU0sQ0FBQyxTQUFTLENBQUMsZUFBZSxFQUFFLENBQUMsT0FBTyxFQUFFLENBQUMsQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLENBQUE7SUFDL0QsQ0FBQyxDQUFBLENBQUMsQ0FBQTtJQUVGLEVBQUUsQ0FBQyx1Q0FBdUMsRUFBRSxHQUFRLEVBQUU7UUFDcEQsTUFBTSxXQUFXLENBQUMsYUFBYSxFQUFFLENBQUE7UUFDakMsTUFBTSxDQUFDLFNBQVMsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxTQUFTLEVBQUUsQ0FBQyxDQUFDLFVBQVUsRUFBRSxDQUFBO1FBQ3hELE1BQU0sQ0FBQyxTQUFTLENBQUMsZUFBZSxFQUFFLENBQUMsT0FBTyxFQUFFLENBQUMsQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLENBQUE7UUFDN0QsTUFBTSxDQUFDLFNBQVMsQ0FBQyxhQUFhLEVBQUUsQ0FBQyxTQUFTLEVBQUUsQ0FBQyxDQUFDLFVBQVUsRUFBRSxDQUFBO1FBQzFELE1BQU0sQ0FBQyxTQUFTLENBQUMsa0JBQWtCLEVBQUUsQ0FBQyxPQUFPLEVBQUUsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsQ0FBQTtJQUNsRSxDQUFDLENBQUEsQ0FBQyxDQUFBO0lBRUYsUUFBUSxDQUFDLEdBQVEsRUFBRTtRQUNmLE1BQU0sb0JBQU8sQ0FBQyxLQUFLLEVBQUUsQ0FBQTtJQUN6QixDQUFDLENBQUEsQ0FBQyxDQUFBO0FBRUosQ0FBQyxDQUFBLENBQUMsQ0FBQSJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHJhZGUuc3BlYy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3Rlc3RzL3RyYWRlLnNwZWMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBLHdCQUF3QjtBQUN4QiwyQ0FBOEQ7QUFDOUQsb0RBQStDO0FBQy9DLHdEQUFtRDtBQUNuRCxzREFBMkM7QUFFM0MsTUFBTSxTQUFTLEdBQUcsSUFBSSxzQkFBUyxFQUFFLENBQUE7QUFDakMsTUFBTSxXQUFXLEdBQUcsSUFBSSwwQkFBVyxFQUFFLENBQUE7QUFFckMsUUFBUSxDQUFDLDhDQUE4QyxFQUFFLEdBQVEsRUFBRTtJQUVqRSxVQUFVLENBQUMsR0FBUSxFQUFFO1FBQ25CLE1BQU0sb0JBQU8sQ0FBQyxxQkFBcUIsQ0FBQyxLQUFLLENBQUMsQ0FBQTtRQUMxQyxNQUFNLG9CQUFPLENBQUMsR0FBRyxDQUFDLG9CQUFPLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFBO0lBQzNDLENBQUMsQ0FBQSxDQUFDLENBQUE7SUFFRixFQUFFLENBQUMsc0NBQXNDLEVBQUUsR0FBUyxFQUFFO1FBQ3BELE1BQU0sa0JBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQTtRQUNqQixPQUFPLENBQUMsR0FBRyxDQUFDLFlBQVksQ0FBQyxDQUFBO0lBQzNCLENBQUMsQ0FBQSxDQUFDLENBQUM7SUFVSCwwREFBMEQ7SUFDMUQsc0VBQXNFO0lBQ3RFLHNDQUFzQztJQUN0Qyx3RUFBd0U7SUFDeEUsOEdBQThHO0lBQzlHLEtBQUs7SUFDTCxFQUFFO0lBQ0YsMkRBQTJEO0lBQzNELHNDQUFzQztJQUN0QyxzRUFBc0U7SUFDdEUsNkdBQTZHO0lBQzdHLEtBQUs7SUFDTCxFQUFFO0lBQ0YsMkRBQTJEO0lBQzNELHNDQUFzQztJQUN0QyxrRUFBa0U7SUFDbEUsS0FBSztJQUNMLEVBQUU7SUFDRiwyREFBMkQ7SUFDM0Qsc0NBQXNDO0lBQ3RDLDZEQUE2RDtJQUM3RCxrRUFBa0U7SUFDbEUsK0RBQStEO0lBQy9ELHFFQUFxRTtJQUNyRSxLQUFLO0lBRUwsUUFBUSxDQUFDLEdBQVEsRUFBRTtRQUNmLE1BQU0sb0JBQU8sQ0FBQyxLQUFLLEVBQUUsQ0FBQTtJQUN6QixDQUFDLENBQUEsQ0FBQyxDQUFBO0FBRUosQ0FBQyxDQUFBLENBQUMsQ0FBQSJ9

@@ -11,7 +11,7 @@ exports.config = {
   multiCapabilities: [{
     browserName: 'chrome',
     chromeOptions: {
-      args: ['--start-maximized', '--disable-infobars', '--disable-notifications', '--headless', '--no-sandbox']
+      args: ['--start-maximized', '--disable-infobars', '--disable-notifications', '--no-sandbox']
     }
   }],
   jasmineNodeOpts: {
@@ -19,7 +19,8 @@ exports.config = {
     realtimeFailure: true,
     showColors: true,
     includeStackTrace: true,
-    defaultTimeoutInterval: 300000
+    defaultTimeoutInterval: 300000,
+    print: () => {},
   },
   onPrepare: function() {
     jasmine.getEnv().addReporter(new SpecReporter({
@@ -48,4 +49,15 @@ exports.config = {
   params: {
     baseUrl: 'http://localhost:3000/'
   }
+
+  // function setup() {
+  //   by.addLocator('qa', (qaTag, parentElement) => {
+  //     const parent = parentElement || document
+  //     return parent.querySelector('[data-qa="' + qaTag + '"]')
+  // })
+  //
+  // by.addLocator('qaPrefix', (qaPrefix, parentElement) => {
+  //   const parent = parentElement || document
+  //   return parent.querySelectorAll('[data-qa^="' + qaPrefix + '"]')
+  // })
 }
