@@ -23,6 +23,7 @@ exports.config = {
     print: () => {},
   },
   onPrepare: function() {
+    setUpCustomLocators()
     jasmine.getEnv().addReporter(new SpecReporter({
       displayStacktrace: 'all',
       displaySuccessesSummary: false,
@@ -49,15 +50,25 @@ exports.config = {
   params: {
     baseUrl: 'http://localhost:3000/'
   }
+}
 
-  // function setup() {
-  //   by.addLocator('qa', (qaTag, parentElement) => {
-  //     const parent = parentElement || document
-  //     return parent.querySelector('[data-qa="' + qaTag + '"]')
-  // })
-  //
-  // by.addLocator('qaPrefix', (qaPrefix, parentElement) => {
-  //   const parent = parentElement || document
-  //   return parent.querySelectorAll('[data-qa^="' + qaPrefix + '"]')
-  // })
+function setUpCustomLocators() {
+  by.addLocator('qaTag', (qaTag, parentElement) => {
+      const parent = parentElement || document;
+      return parent.querySelector(`[data-qa-id=${qaTag}]`);
+  });
+  by.addLocator('qaTagAll', (qaTag, parentElement) => {
+    const parent = parentElement || document;
+    return parent.querySelectorAll(`[data-qa-id=${qaTag}]`);
+  });
+
+  by.addLocator('qa', (qa, parentElement) => {
+      const parent = parentElement || document;
+      return parent.querySelector(`[data-qa=${qa}]`);
+  });
+
+  by.addLocator('qaAll', (qa, parentElement) => {
+    const parent = parentElement || document;
+    return parent.querySelectorAll(`[data-qa=${qa}]`);
+  });
 }

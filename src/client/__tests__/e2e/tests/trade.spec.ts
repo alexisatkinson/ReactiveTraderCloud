@@ -15,9 +15,12 @@ describe('UI Smoke Tests for Reactive Trader Cloud App', async() => {
   })
 
   it('User should be able to refine search', async () => {
-    await wait(10000)
-    console.log("am i here!")
+    await wait(5000)
+    const element = await browser.element(by.qaTag('currency-option-eur'))
+    element.click()
+    await wait(3000)
   });
+
 
 
 
