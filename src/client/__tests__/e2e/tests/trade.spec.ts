@@ -1,5 +1,5 @@
 // Import required pages
-import { ProtractorBrowser } from 'protractor'
+import { ProtractorBrowser, by } from 'protractor'
 import { getBrowser } from '../browser-manager'
 import { wait } from '../utils/async.utils'
 import { waitForElementToBeVisible } from '../utils/browser.utils'
@@ -21,7 +21,9 @@ describe('UI Tests for Reactive Trader Cloud Web Application', async () => {
   })
 
   it('select currency workspace component', async () => {
-    await mainPage.workspace.selectCurrency('EUR')
+    await mainPage.workspace.selectCurrency('NZD')
+    const element = browser.element(by.qaTag('currency-option-nzd'))
+    expect(element.getText()).toBe('NZD')
     await wait(3000)
   })
 

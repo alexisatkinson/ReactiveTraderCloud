@@ -52,9 +52,4 @@ export class WorkspaceComponent {
       }
     }
   }
-
-  async isConnected() {
-    const connectionElement = this.browser.element(by.qa('status-button__toggle-button'))
-    return connectionElement.isPresent()
-  }
 }
